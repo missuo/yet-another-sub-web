@@ -13,7 +13,7 @@ export const config = {
     Surfboard: "surfboard",
     Surge2: "surge&ver=2",
     Surge3: "surge&ver=3",
-    Surge4: "surge&ver=4",
+    "Surge4/5": "surge&ver=4",
     Trojan: "trojan",
     V2Ray: "v2ray",
     Singbox: "singbox",

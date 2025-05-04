@@ -15,7 +15,6 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Metadata } from "next";
 import { toast } from "sonner";
 import copy from "copy-to-clipboard";
 
