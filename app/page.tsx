@@ -35,6 +35,14 @@ const backends = process.env.NEXT_PUBLIC_BACKENDS?.split("|") ?? [
   "http://127.0.0.1:25500/sub?",
 ];
 
+// Function to get display names for backends
+const getBackendDisplayName = (backendUrl: string) => {
+  if (backendUrl === "https://sub.mli.li/sub?") {
+    return "OwO Network Backend";
+  }
+  return backendUrl;
+};
+
 type Mode = "easy" | "hard";
 
 interface PageParams extends CreateSubParams {
@@ -186,11 +194,12 @@ export default function Home() {
                       }
                       defaultItems={backends.map((value) => ({
                         value: value,
+                        label: getBackendDisplayName(value),
                       }))}
                     >
                       {(item) => (
                         <AutocompleteItem key={item.value}>
-                          {item.value}
+                          {item.label}
                         </AutocompleteItem>
                       )}
                     </Autocomplete>
@@ -301,7 +310,6 @@ export default function Home() {
       </main>
 
       {/* Fixed footer at the bottom */}
-
       <footer className="py-4 border-t border-gray-200 dark:border-gray-800 w-full flex flex-col items-center">
         <p className="text-sm text-center flex items-center gap-2">
           Powered by{" "}
