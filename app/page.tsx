@@ -15,7 +15,7 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import { Icon } from "@iconify/react/dist/iconify.js";
-
+import { Metadata } from "next";
 import { toast } from "sonner";
 import copy from "copy-to-clipboard";
 
@@ -109,6 +109,12 @@ export default function Home() {
 
   return (
     <div className="w-full p-4 flex flex-col justify-center items-center gap-3">
+      <h1 className="text-2xl font-bold mb-4">Subscription Converter</h1>
+      <p className="text-sm mb-6 text-center max-w-md">
+        Convert and customize your proxy subscription links between different
+        clients
+      </p>
+
       <Card className="w-full lg:w-1/2 md:w-2/3">
         <CardBody>
           <Tabs
@@ -287,12 +293,51 @@ export default function Home() {
           </div>
         </CardFooter>
       </Card>
-      <p className="text-bold text-sm text-center">
-        Powered by{" "}
-        <Link isExternal href="https://owo.network">
-          OwO Network, LLC
-        </Link>
-      </p>
+
+      <footer className="mt-6 py-4 border-t border-gray-200 dark:border-gray-800 w-full flex flex-col items-center">
+        <div className="flex items-center gap-2 mb-2">
+          <Icon icon="solar:star-bold" className="text-yellow-500" />
+          <span className="text-sm font-medium">
+            Subscription Converter Tool
+          </span>
+          <Icon icon="solar:star-bold" className="text-yellow-500" />
+        </div>
+        <div className="flex items-center gap-3 mb-3">
+          <Link
+            href="https://github.com/OwO-Network"
+            isExternal
+            className="text-sm flex items-center gap-1"
+          >
+            <Icon icon="mdi:github" />
+            GitHub
+          </Link>
+          <Link
+            href="https://docs.owo.network"
+            isExternal
+            className="text-sm flex items-center gap-1"
+          >
+            <Icon icon="solar:document-linear" />
+            Docs
+          </Link>
+          <Link
+            href="https://status.owo.network"
+            isExternal
+            className="text-sm flex items-center gap-1"
+          >
+            <Icon icon="solar:server-path-linear" />
+            Status
+          </Link>
+        </div>
+        <p className="text-sm text-center">
+          © {new Date().getFullYear()} Powered by{" "}
+          <Link isExternal href="https://owo.network" className="font-medium">
+            OwO Network, LLC
+          </Link>
+        </p>
+        <div className="mt-2">
+          <SwitchTheme />
+        </div>
+      </footer>
     </div>
   );
 }
