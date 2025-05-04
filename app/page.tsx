@@ -48,7 +48,7 @@ const initialParams: PageParams = {
   subLink: "",
   backend: backends[0],
   url: "",
-  target: "Auto Detect",
+  target: "Clash",
   config: "",
   include: "",
   exclude: "",
@@ -56,7 +56,7 @@ const initialParams: PageParams = {
   udp: false,
   scv: false,
   append_type: false,
-  emoji: false,
+  emoji: true,
   list: false,
 };
 
