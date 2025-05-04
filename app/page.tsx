@@ -79,7 +79,10 @@ export default function Home() {
   const createSubscription = useCallback(() => {
     try {
       const { mode, subLink: _, ...subParams } = params;
-      const newSubLink = createSub(subParams);
+      const newSubLink = createSub({
+        ...subParams,
+        mode, // Pass mode to createSub function
+      });
       copy(newSubLink);
       toast.success("Custom subscription copied to clipboard");
 
@@ -99,6 +102,10 @@ export default function Home() {
       subLink
     )}`;
   }, [params.subLink]);
+
+  const handleSwitchChange = (key: string, value: boolean) => {
+    setParams((prevParams) => ({ ...prevParams, [key]: value }));
+  };
 
   return (
     <div className="w-full p-4 flex flex-col justify-center items-center gap-3">
@@ -235,7 +242,7 @@ export default function Home() {
                               params[cell.key as keyof PageParams] as boolean
                             }
                             onValueChange={(value) =>
-                              setParams({ ...params, [cell.key]: value })
+                              handleSwitchChange(cell.key, value)
                             }
                           />
                         ))}
@@ -281,11 +288,7 @@ export default function Home() {
         </CardFooter>
       </Card>
       <p className="text-bold text-sm text-center">
-        Made with <SwitchTheme /> by{" "}
-        <Link isExternal href="https://github.com/DyAxy/yet-another-sub-web">
-          DyAxy
-        </Link>
-        . Powered by{" "}
+        Powered by{" "}
         <Link isExternal href="https://owo.network">
           OwO Network, LLC
         </Link>

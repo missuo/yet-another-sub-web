@@ -49,23 +49,27 @@ export const createSub = (params: CreateSubParams) => {
     "&insert=false",
   ];
 
-  if (params.mode === "hard") {
+  // Add all options regardless of mode, but check if they are enabled
+  // Config is only added if it has a value and we're in hard mode
+  if (mode === "hard" && config) {
     const configItem = cfg.remoteConfig
       .flatMap((category) => category.items)
       .find((item) => item.label === config);
     const configValue = configItem ? configItem.value : config;
-
-    if (config)
-      flow.push(`&config=${encodeURIComponent(configValue as string)}`);
-    if (include) flow.push(`&include=${encodeURIComponent(include)}`);
-    if (exclude) flow.push(`&exclude=${encodeURIComponent(exclude)}`);
-    if (tfo) flow.push("&tfo=true");
-    if (udp) flow.push("&udp=true");
-    if (scv) flow.push("&scv=true");
-    if (append_type) flow.push("&append_type=true");
-    if (emoji) flow.push("&emoji=true");
-    if (list) flow.push("&list=true");
+    flow.push(`&config=${encodeURIComponent(configValue as string)}`);
   }
+
+  // Include and exclude are added if they have values
+  if (include) flow.push(`&include=${encodeURIComponent(include)}`);
+  if (exclude) flow.push(`&exclude=${encodeURIComponent(exclude)}`);
+
+  // Boolean options are added if they are true
+  if (tfo) flow.push("&tfo=true");
+  if (udp) flow.push("&udp=true");
+  if (scv) flow.push("&scv=true");
+  if (append_type) flow.push("&append_type=true");
+  if (emoji) flow.push("&emoji=true");
+  if (list) flow.push("&list=true");
 
   return flow.join("");
 };
