@@ -26,17 +26,29 @@ import { InputCell } from "@/components/InputCell";
 import { SwitchCell } from "@/components/SwitchCell";
 import { SwitchTheme } from "@/components/SwitchTheme";
 
-import { createSub } from "@/app/hooks/createSub";
+import {
+  createSub,
+  type CreateSubParams,
+  type ClientType,
+} from "@/app/hooks/createSub";
 
 const backends = process.env.NEXT_PUBLIC_BACKENDS?.split("|") ?? [
   "http://127.0.0.1:25500/sub?",
 ];
-const initialParams = {
+
+type Mode = "easy" | "hard";
+
+interface PageParams extends CreateSubParams {
+  mode: Mode;
+  subLink: string;
+}
+
+const initialParams: PageParams = {
   mode: "easy",
   subLink: "",
   backend: backends[0],
   url: "",
-  target: "",
+  target: "Auto Detect",
   config: "",
   include: "",
   exclude: "",
@@ -62,15 +74,16 @@ export default function Home() {
     },
   ];
 
-  const [params, setParams] = useState(initialParams);
+  const [params, setParams] = useState<PageParams>(initialParams);
 
   const createSubscription = useCallback(() => {
     try {
-      const subLink = createSub(params);
-      copy(subLink);
+      const { mode, subLink: _, ...subParams } = params;
+      const newSubLink = createSub(subParams);
+      copy(newSubLink);
       toast.success("Custom subscription copied to clipboard");
 
-      setParams((prevParams) => ({ ...prevParams, subLink }));
+      setParams((prevParams) => ({ ...prevParams, subLink: newSubLink }));
     } catch (e) {
       toast.error((e as Error).message);
     }
@@ -98,7 +111,7 @@ export default function Home() {
             items={tabs}
             selectedKey={params.mode}
             onSelectionChange={(key) =>
-              setParams({ ...params, mode: key.toString() })
+              setParams({ ...params, mode: key.toString() as Mode })
             }
           >
             {(item) => (
@@ -130,7 +143,10 @@ export default function Home() {
                     className="w-full"
                     selectedKey={params.target}
                     onSelectionChange={(key) =>
-                      setParams({ ...params, target: (key ?? "").toString() })
+                      setParams({
+                        ...params,
+                        target: (key ?? "Auto Detect") as ClientType,
+                      })
                     }
                     defaultItems={Object.entries(cfg.clients)}
                   >
@@ -196,7 +212,7 @@ export default function Home() {
                         <InputCell
                           label="Include Nodes"
                           value={params.include}
-                          onValueChange={(value) =>
+                          onValueChange={(value: string) =>
                             setParams({ ...params, include: value })
                           }
                           placeholder="Keywords to include in node names, supports regex"
@@ -204,7 +220,7 @@ export default function Home() {
                         <InputCell
                           label="Exclude Nodes"
                           value={params.exclude}
-                          onValueChange={(value) =>
+                          onValueChange={(value: string) =>
                             setParams({ ...params, exclude: value })
                           }
                           placeholder="Keywords to exclude in node names, supports regex"
@@ -215,7 +231,9 @@ export default function Home() {
                           <SwitchCell
                             key={cell.key}
                             title={cell.title}
-                            isSelected={params[cell.key]}
+                            isSelected={
+                              params[cell.key as keyof PageParams] as boolean
+                            }
                             onValueChange={(value) =>
                               setParams({ ...params, [cell.key]: value })
                             }
