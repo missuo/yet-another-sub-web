@@ -128,9 +128,8 @@ export default function Home() {
           <h1 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             Subscription Converter
           </h1>
-          <p className="text-sm text-center whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
-            Convert and customize your proxy subscription links between
-            different clients
+          <p className="text-sm text-center overflow-hidden text-ellipsis max-w-full">
+            Convert subscription links to different clients
           </p>
         </div>
 
