@@ -36,12 +36,18 @@ const backends = process.env.NEXT_PUBLIC_BACKENDS?.split("|") ?? [
 ];
 
 // Function to get display names for backends
-const getBackendDisplayName = (backendUrl: string) => {
+const getBackendDisplayName = (backendUrl: string): string => {
   if (backendUrl === "https://sub.mli.li/sub?") {
     return "OwO Network Backend";
   }
   return backendUrl;
 };
+
+// Prepare backend items with both value and label
+const backendItems = backends.map((value) => ({
+  value: value,
+  label: getBackendDisplayName(value),
+}));
 
 type Mode = "easy" | "hard";
 
@@ -55,7 +61,7 @@ const initialParams: PageParams = {
   subLink: "",
   backend: backends[0],
   url: "",
-  target: "Clash",
+  target: "Clash", // Set default client type to Clash
   config: "",
   include: "",
   exclude: "",
@@ -171,7 +177,7 @@ export default function Home() {
                       onSelectionChange={(key) =>
                         setParams({
                           ...params,
-                          target: (key ?? "Auto Detect") as ClientType,
+                          target: (key ?? "Clash") as ClientType,
                         })
                       }
                       defaultItems={Object.entries(cfg.clients)}
@@ -188,17 +194,17 @@ export default function Home() {
                       placeholder="Please select or enter the backend address, leave empty to use default"
                       className="w-full"
                       allowsCustomValue
-                      inputValue={params.backend}
-                      onInputChange={(value) =>
-                        setParams({ ...params, backend: value })
+                      selectedKey={params.backend}
+                      onSelectionChange={(key) =>
+                        setParams({ ...params, backend: key as string })
                       }
-                      defaultItems={backends.map((value) => ({
-                        value: value,
-                        label: getBackendDisplayName(value),
-                      }))}
+                      defaultItems={backendItems}
                     >
                       {(item) => (
-                        <AutocompleteItem key={item.value}>
+                        <AutocompleteItem
+                          key={item.value}
+                          textValue={item.label}
+                        >
                           {item.label}
                         </AutocompleteItem>
                       )}
