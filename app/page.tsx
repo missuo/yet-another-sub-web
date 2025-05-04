@@ -329,7 +329,7 @@ export default function Home() {
           </Link>
         </div>
         <p className="text-sm text-center">
-          © {new Date().getFullYear()} Powered by{" "}
+          Powered by{" "}
           <Link isExternal href="https://owo.network" className="font-medium">
             OwO Network, LLC
           </Link>
