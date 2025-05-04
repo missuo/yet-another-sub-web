@@ -301,16 +301,16 @@ export default function Home() {
       </main>
 
       {/* Fixed footer at the bottom */}
+
       <footer className="py-4 border-t border-gray-200 dark:border-gray-800 w-full flex flex-col items-center">
-        <p className="text-sm text-center">
+        <p className="text-sm text-center flex items-center gap-2">
           Powered by{" "}
           <Link isExternal href="https://owo.network" className="font-medium">
             OwO Network, LLC
           </Link>
-        </p>
-        <div className="mt-2">
+          <span className="mx-1 text-gray-400">|</span>
           <SwitchTheme />
-        </div>
+        </p>
       </footer>
     </div>
   );
