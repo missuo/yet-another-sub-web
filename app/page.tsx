@@ -65,7 +65,7 @@ export default function Home() {
     {
       key: "easy",
       label: "Easy Mode",
-      icon: "solar:cat-linear",
+      icon: "solar:heart-pulse-broken",
     },
     {
       key: "hard",
