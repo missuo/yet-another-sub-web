@@ -1,6 +1,6 @@
 # yet-another-sub-web
 
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fs.mli.li&style=flat-square&label=Demo) ![Vercel](https://vercelbadge.vercel.app/api/missuo/yet-another-sub-web?style=flat-square&label=Vercel) ![GitHub License](https://img.shields.io/github/license/missuo/yet-another-sub-web?style=flat-square&label=License)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fs.mli.li&style=flat-square&label=demo) ![Vercel](https://vercelbadge.vercel.app/api/missuo/yet-another-sub-web?style=flat-square) ![GitHub License](https://img.shields.io/github/license/missuo/yet-another-sub-web?style=flat-square)
 
 Yet another [sub-web](https://github.com/CareyWang/sub-web), a frontend implemented using React and Next.JS. It requires the [tindy2013/subconverter](https://github.com/tindy2013/subconverter) backend to handle subscription configuration conversions.
 
