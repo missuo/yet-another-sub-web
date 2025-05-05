@@ -30,6 +30,6 @@ docker compose up -d
 
 ## Acknowledgements
 
-[DyAxy/yet-another-sub-web](https://github.com/DyAxy/yet-another-sub-web)
-[CareyWang/sub-web](https://github.com/CareyWang/sub-web)
-[tindy2013/subconverter](https://github.com/tindy2013/subconverter)
+- [DyAxy/yet-another-sub-web](https://github.com/DyAxy/yet-another-sub-web)
+- [CareyWang/sub-web](https://github.com/CareyWang/sub-web)
+- [tindy2013/subconverter](https://github.com/tindy2013/subconverter)
