@@ -1,12 +1,13 @@
 name: yet-another-sub-web
 
 services:
-  bot:
-    image: moefaq/yet-another-sub-web
+  yet-another-sub-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: always
     environment:
-      TZ: Asia/Shanghai
-      NEXT_PUBLIC_SHORTURL: https://suo.yt/
+      TZ: America/New_York
       NEXT_PUBLIC_BACKENDS: http://127.0.0.1:25500/sub?
     ports:
       - "127.0.0.1:3000:3000"

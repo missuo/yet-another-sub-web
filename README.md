@@ -1,81 +1,35 @@
-# yet-another-sub-web 又一个订阅转换前端
+# yet-another-sub-web
 
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fyet-another-sub-web.vercel.app&style=flat-square&label=DEMO) ![Vercel](https://vercelbadge.vercel.app/api/DyAxy/yet-another-sub-web?style=flat-square) ![GitHub License](https://img.shields.io/github/license/DyAxy/yet-another-sub-web?style=flat-square)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fs.mli.li&style=flat-square&label=DEMO) ![Vercel](https://vercelbadge.vercel.app/api/missuo/yet-another-sub-web?style=flat-square) ![GitHub License](https://img.shields.io/github/license/missuo/yet-another-sub-web?style=flat-square)
 
-又一个 [sub-web](https://github.com/CareyWang/sub-web)，基于 React、Next.JS 实现前端，需要搭配 [tindy2013/subconverter](https://github.com/tindy2013/subconverter) 后端来实现订阅配置。
+Yet another [sub-web](https://github.com/CareyWang/sub-web), a frontend implemented using React and Next.JS. It requires the [tindy2013/subconverter](https://github.com/tindy2013/subconverter) backend to handle subscription configuration conversions.
 
-## 快速部署
+This is a modified version based on [DyAxy/yet-another-sub-web](https://github.com/DyAxy/yet-another-sub-web).
 
-### 使用 Vercel 服务
+## Quick Deployment
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FDyAxy%2Fyet-another-sub-web&env=NEXT_PUBLIC_SHORTURL,NEXT_PUBLIC_BACKENDS&envDescription=%E5%A6%82%E6%9E%9C%E4%B8%8D%E4%BC%9A%E5%A1%AB%E7%82%B9%E5%8F%B3%E8%BE%B9%20%20Learn%20More&envLink=https%3A%2F%2Fgithub.com%2FDyAxy%2Fyet-another-sub-web%2Fblob%2Fmaster%2F.env&project-name=yet-another-sub-web&repository-name=yet-another-sub-web)
+### Using Vercel Service
 
-### 本地使用 Docker
-- Docker run方式部署
-```
-docker run -d -p 127.0.0.1:3000:3000 --name yet-another-sub-web --restart=always moefaq/yet-another-sub-web:latest -e NEXT_PUBLIC_SHORTURL=https://suo.yt/ -e NEXT_PUBLIC_BACKENDS=http://127.0.0.1:25500/sub?
-# 替换后端或短链接服务
-```
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmissuo%2Fyet-another-sub-web&env=NEXT_PUBLIC_BACKENDS&envDescription=Set%20the%20required%20backend%20URL.%20Click%20Learn%20More%20for%20details.&envLink=https%3A%2F%2Fgithub.com%2Fmissuo%2Fyet-another-sub-web%2Fblob%2Fmaster%2F.env&project-name=yet-another-sub-web&repository-name=yet-another-sub-web)
 
-- Docker compose方式部署
-```
-curl -LO https://raw.githubusercontent.com/DyAxy/yet-another-sub-web/master/docker-compose.yml
-# 你可以修改 docker-compose.yml 中的 env
+### Using Docker Locally
+
+**Deploy using `docker-compose`:**
+
+```bash
+curl -O compose.yaml https://raw.githubusercontent.com/missuo/yet-another-sub-web/master/compose.yaml
+# You can modify the environment variables in compose.yaml
 docker compose up -d
 ```
 
-### 环境变量
-| NEXT_PUBLIC_SHORTURL | NEXT_PUBLIC_BACKENDS        |
-| -------------------- | --------------------------- |
-| 短链接服务，记得带 /   | 后端完整地址                 |
-| https://suo.yt/      | http://127.0.0.1:25500/sub? |
+### Environment Variables
 
+| Variable Name          | Description                                  | Example                     |
+| ---------------------- | -------------------------------------------- | --------------------------- |
+| `NEXT_PUBLIC_BACKENDS` | Full backend address(es), separated by `|` | `http://127.0.0.1:25500/sub?` |
 
-## 常规部署
+## Acknowledgements
 
-首先你需要 [Node.js](https://nodejs.org/en/download/package-manager/all) 环境
-
-```
-# Clone 库 并跳转至该文件夹
-git clone https://github.com/DyAxy/yet-another-sub-web.git
-cd yet-another-sub-web
-# 当然你可以修改配置在 .env
-# NEXT_PUBLIC_SHORTURL 为短链接服务
-# NEXT_PUBLIC_BACKENDS 为后端，请使用|分隔
-# 安装依赖环境并测试，你也可以使用yarn/pnpm/bun
-npm i
-npm run dev
-```
-
-浏览器打开 [http://localhost:3000](http://localhost:3000/) 来查看是否正常运行.
-
-当一切就绪后，你可以打包构建运行它
-
-```
-npm run build
-npm run start
-```
-
-此时打开 [http://localhost:3000](http://localhost:3000/) 即可正常使用。
-需要**常驻进程**，可使用：`screen`，`pm2`，`nohup`，`systemctl`
-
-可能你还需要反代，推荐使用 `Caddy` 轻量化反代，仅需加入到 `CaddyFile` 这些即可使用：
-
-```
-你的域名.com {
-  encode gzip
-  reverse_proxy 127.0.0.1:3000
-}
-```
-
-## 静态导出
-
-在常规部署 `npm run dev` 之后，测试没问题的情况下，修改文件：`next.config.mjs`，添加一行：`nextConfig.output = 'export'`
-则会将html及其js文件静态导出至out文件夹，使用 `Caddy`、`nginx` 之类即可使用。
-
-
-## 感谢
-
-[CareyWang/sub-web](https://github.com/CareyWang/sub-web)  
-[CareyWang/MyUrls](https://github.com/CareyWang/MyUrls)  
-[tindy2013/subconverter](https://github.com/tindy2013/subconverter)  
+[DyAxy/yet-another-sub-web](https://github.com/DyAxy/yet-another-sub-web)
+[CareyWang/sub-web](https://github.com/CareyWang/sub-web)
+[tindy2013/subconverter](https://github.com/tindy2013/subconverter)
