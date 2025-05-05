@@ -26,7 +26,7 @@ docker compose up -d
 
 | Variable Name          | Description                                  | Example                     |
 | ---------------------- | -------------------------------------------- | --------------------------- |
-| `NEXT_PUBLIC_BACKENDS` | Full backend address(es), separated by `|` | `http://127.0.0.1:25500/sub?` |
+| `NEXT_PUBLIC_BACKENDS` | Full backend address(es), separated by `\|` | `http://127.0.0.1:25500/sub?` |
 
 ## Acknowledgements
 
